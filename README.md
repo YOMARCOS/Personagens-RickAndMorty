@@ -24,4 +24,4 @@ Este projeto utiliza a API de Rick and Morty para buscar informações sobre os 
 - Digite um termo na caixa de pesquisa para buscar personagens específicos.
 - Clique nos botões de páginação para navegar entre as páginas de personagens.
 
-
+Acesse o projeto no link  https://yomarcos.github.io/Personagens-RickAndMorty/
