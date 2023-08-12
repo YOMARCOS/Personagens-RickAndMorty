@@ -5,14 +5,14 @@ async function runApi() {
   try {
     const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`);
     const characters = response.data.results;
-    console.log(response.data);
 
     const personDiv = document.querySelector(".roll");
     personDiv.innerHTML = ""; // Limpa o conteúdo anterior
+
     const pageAtual = document.getElementById("Atual");
     pageAtual.textContent = `Página ${page} `;
 
-  if (page > 1 && page < 42) {
+    if (page > 1 && page < 42) {
       const paginnation = document.getElementById("paginnation");
       let voltar = document.getElementById("voltar");
 
@@ -42,6 +42,29 @@ async function runApi() {
   }
 }
 
+async function searchByName() {
+  const searchInput = document.getElementById("searchInput").value; // Captura o valor do campo de busca
+  if (searchInput) {
+    try {
+      const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchInput}`);// Captura o valor do campo de busca
+      const characters = response.data.results;
+
+      const personDiv = document.querySelector(".roll"); // Captura o elemento
+      personDiv.innerHTML = ""; // Limpa o conteúdo anterior
+
+      for (let i = 0; i < characters.length; i++) { // Percorre os personagens
+        const character = characters[i];
+        createCharacter(character, personDiv);
+      }
+
+    } catch (error) {
+      console.error("Ocorreu um erro:", error);
+    }
+  } else {
+    runApi(); // Se o campo de busca estiver vazio, mostra todos os personagens
+  }
+}
+
 function nextPage() {
   page++;
   runApi();
@@ -53,6 +76,7 @@ function voltar() {
     runApi();
   }
 }
+
 
 function createCharacter(person, container) {
   const cardDiv = document.createElement("div");
