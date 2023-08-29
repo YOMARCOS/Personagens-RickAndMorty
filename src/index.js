@@ -6,7 +6,7 @@ async function runApi() {
     const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`);
     const characters = response.data.results;
 
-    const personDiv = document.querySelector(".roll");
+    const personDiv = document.getElementById("personDiv");
     personDiv.innerHTML = ""; // Limpa o conteúdo anterior
 
     const pageAtual = document.getElementById("Atual");
@@ -21,6 +21,7 @@ async function runApi() {
         voltar.setAttribute("id", "voltar");
         voltar.setAttribute("onclick", "voltar()");
         voltar.textContent = "Voltar";
+        voltar.setAttribute("class", "btn-group bg-btn-br p-1");
         paginnation.prepend(voltar);
       }
     }
@@ -49,7 +50,7 @@ async function searchByName() {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchInput}`);// Captura o valor do campo de busca
       const characters = response.data.results;
 
-      const personDiv = document.querySelector(".roll"); // Captura o elemento
+      const personDiv = document.getElementById("personDiv"); // Captura o elemento
       personDiv.innerHTML = ""; // Limpa o conteúdo anterior
 
       for (let i = 0; i < characters.length; i++) { // Percorre os personagens
@@ -77,33 +78,72 @@ function voltar() {
   }
 }
 
+function createCharacter(person) {
+  if(person.status === "Alive") {
+    person.status += " 💗";
+  } if(person.status === "Dead") {
+    person.status += " 💀";
+  }if(person.status === "unknown") {
+   person.status += " ❓ ";
+  }
+  if(person.species === "Alien") {
+    person.species += " 👽";
+  } if(person.species === "Human") {
+    person.species += " 🌎";
+  }
 
-function createCharacter(person, container) {
-  const cardDiv = document.createElement("div");
-  cardDiv.classList.add("card");
+const id= person.id
 
-  const image = document.createElement("img");
-  image.src = person.image;
-  cardDiv.appendChild(image);
+const personDiv = document.getElementById("personDiv");
 
-  const dados = document.createElement("div");
-  dados.classList.add("dados");
+personDiv.innerHTML += `
 
-  const name = document.createElement("h2");
-  name.innerHTML = person.name;
-  dados.appendChild(name);
+<div class="col-sm-12 col-md-6 col-lg-3 mt-5 d-flex justify-content-center">
 
-  const status = document.createElement("p");
-  status.innerHTML = `status: ${person.status}`;
-  dados.appendChild(status);
+    <div class="card bg-btn-br text-white shadow-lg  mb-5"   style="width: 18rem;" data-bs-toggle="modal"    data-bs-target="#staticBackdrop" onclick="openModal(${id})">
+  </button>
+    <img src="${person.image}" class="card-img-top img-fluid"  alt="...">
+    <div class="card-body  ">
+    <h5 class="card-title text-white ">${person.name} </h5>
+    <h6 class="card-subtitle  text-white">status: ${person.status} </h6>
+    <p class="card-text text-white">espécie: ${person.species}</p>
+</div>
+</div>
+</div>
+`
 
-  const species = document.createElement("p");
-  species.innerHTML = `espécie: ${person.species}`;
-  dados.appendChild(species);
-
-  cardDiv.appendChild(dados);
-  container.appendChild(cardDiv);
 }
-
-
 runApi();
+
+
+async function openModal(id){
+  const response = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
+  const character = response.data;  
+ const modalContent = document.getElementById("modal-content");
+if(character.status === "Alive") {
+  character.status += " 🟢";
+} if(character.status === "Dead") {
+  character.status += " 💀";
+}if(character.status === "unknown") {
+   character.status += " ❓ ";
+}
+if(character.species === "Alien") {
+  character.species += " 👽";
+} if(character.species === "Human") {
+  character.species += " 🌎";
+}
+ modalContent.innerHTML = `
+ <div class="modal-body bg-white">
+                    <img src="${character.image}" alt="" class="img-fluid rounded-circle">
+                    <div class="text-center">
+                    <h1>${character.name}</h1>
+                    <h6>${character.status}</h6>
+                    <h6> ${character.species}</h6>
+                    <h6>${character.gender}</h6>
+                    <h6>${character.origin.name}</h6>
+                    <h6>${character.location.name}</h6>
+                    </div>
+                </div>`
+
+
+}
