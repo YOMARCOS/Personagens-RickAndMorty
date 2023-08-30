@@ -101,7 +101,7 @@ personDiv.innerHTML += `
 <div class="col-sm-12 col-md-6 col-lg-3 mt-5 d-flex justify-content-center">
 
     <div class="card bg-btn-br text-white shadow-lg  mb-5"   style="width: 18rem;" data-bs-toggle="modal"    data-bs-target="#staticBackdrop" onclick="openModal(${id})">
-  </button>
+
     <img src="${person.image}" class="card-img-top img-fluid"  alt="...">
     <div class="card-body  ">
     <h5 class="card-title text-white ">${person.name} </h5>
