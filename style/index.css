@@ -134,5 +134,7 @@ bg-transparent{
   .card-img-top {
     animation: fadeIn 0.5s ease-out;
   }
-  
+  .bg-modalh{
+    background: #989898;
+  }
   

@@ -133,15 +133,15 @@ if(character.species === "Alien") {
   character.species += " 🌎";
 }
  modalContent.innerHTML = `
- <div class="modal-body bg-white">
+ <div class="modal-body ">
                     <img src="${character.image}" alt="" class="img-fluid rounded-circle">
                     <div class="text-center">
-                    <h1>${character.name}</h1>
-                    <h6>${character.status}</h6>
-                    <h6> ${character.species}</h6>
-                    <h6>${character.gender}</h6>
-                    <h6>${character.origin.name}</h6>
-                    <h6>${character.location.name}</h6>
+                    <h1 class="text-white">${character.name}</h1>
+                    <h6 class="text-white">${character.status}</h6>
+                    <h6 class="text-white"> ${character.species}</h6>
+                    <h6 class="text-white">${character.gender}</h6>
+                    <h6 class="text-white">${character.origin.name}</h6>
+                    <h6 class="text-white">${character.location.name}</h6>
                     </div>
                 </div>`
 
