@@ -137,4 +137,11 @@ bg-transparent{
   .bg-modalh{
     background: #989898;
   }
-  
+  /* Para navegadores Webkit, como o Google Chrome */
+::-webkit-scrollbar {
+  width: 12px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00ff1a; /* Cor do polegar da barra de rolagem */
+}
