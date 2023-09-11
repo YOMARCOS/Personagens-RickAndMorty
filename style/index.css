@@ -95,10 +95,14 @@ main{
     background-image: radial-gradient( rgb(0, 255, 76) 0%, rgb(0, 227, 30) 0%, rgb(0, 0, 0) 100%);
 }
 footer{
+  position: absolute;
+ bottom: 0;
     width: 100%;
-    font-size: small;
+    color: white; /* Cor do texto no footer */
+    text-align: center;
+ 
 }
-bg-transparent{
+.bg-transparent{
     background: transparent;
 }
 @keyframes pulse {
